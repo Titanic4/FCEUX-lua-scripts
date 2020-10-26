@@ -45,12 +45,14 @@ local Keyboard = {
   enter = false}
   
 local debounce = false;
+    -- Information on startup...
 print("When prompted, you'll get the following controls:")
 print("Shift+Backspace - Clear all")
 print("ENTER/RETURN - confirm")
 print("FCEUX's controllers will be locked while using keyboard")
 print("Once you confirm the name/answer, or the script is shut down, all the controllers will be unlocked.")
 
+    -- Initial detection...
 if(memory.readbyte(0x86) == 1 and memory.readbyte(0x68) == 8) then
   
   for i=0xd46,0xd46+0x1a do
@@ -72,7 +74,7 @@ function update()
   I = input.get()
   
  
- 
+    -- Actual detection... 
   if(memory.readbyte(0x68) == 1 and memory.readbyte(0x70) == 1 ) then limit = 6 end
   if(memory.readbyte(0x86) == 1 and memory.readbyte(0x68) == 8) then limit = 0x1a end
   if(memory.readbyte(0x68) == 1 and memory.readbyte(0x70) ~= 0 and memory.readbyte(0x77) ~= 0 ) then -- for the name entry
